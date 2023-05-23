@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>Add new album</h1>
-    {{ form }}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Album</button>
+    </form>
 </body>
 </html>

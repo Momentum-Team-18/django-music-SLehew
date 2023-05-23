@@ -12,5 +12,6 @@
     {% for album in albums %}
     <p class="album"><a href="{% url 'album-detail' album.pk %}">{{album}}</a></p>
     {% endfor %}
+    <a href="{% url 'album-new' %}">Add Album</a>
 </body>
 </html>
