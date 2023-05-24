@@ -21,15 +21,13 @@ def delete_album(request, pk):
 
 def edit_album(request, pk):
     album = get_object_or_404(Album, pk=pk)
-    if request.method == "POST":
-        form = AlbumForm(request.POST, instance=album)
-        if form.is_valid():
-            album = form.save(commit=False)
-            album.save()
-            return redirect('album-detail', pk=album.pk)
+    if request.method == "GET":
+        context = {'form': AlbumForm(instance=album), 'pk': pk}
     else:
-        form = AlbumForm(instance=album)
-    return render(request, 'edit-album'), {'form': form}
+        form = AlbumForm(request.POST)
+        form.save()
+        return redirect('album-list')
+    return render(request, 'music/edit_album.html', context)
 
 
 def create_album(request):
