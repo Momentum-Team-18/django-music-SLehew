@@ -12,3 +12,7 @@ class Album(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Bands(models.Model):
+    name = models.CharField(max_length=200)

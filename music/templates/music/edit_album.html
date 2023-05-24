@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Album</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Edit{% endblock %}
+{% block content %}
     <h1>Edit Album</h1>
-    <form method="POST">
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Edit Album</button>
+        <button type="submit">Save</button>
     </form>
-</body>
+{% endblock %}
