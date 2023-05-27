@@ -2,9 +2,14 @@
 
 {% block title %}Home{% endblock %}
 {% block content %}
-    <h1>Albums</h1>
+    <h1 >Albums</h1>
     {% for album in albums %}
-    <p class="album"><a href="{% url 'album-detail' album.pk %}">{{album}}</a></p>
-    {% endfor %}
+    <div class="album_container"></div>
+        <p class="album">
+            <img src="{{ album.cover.url }}" width '50'>
+            <a class="title" href="{% url 'album-detail' album.pk %}">{{album}}</a
+            <a>Artist: {{album.band}}</a>
+            {% endfor %}
+        </p>
     <a href="{% url 'album-new' %}">Add Album</a>
 {% endblock %}

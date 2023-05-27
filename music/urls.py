@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.urls import path, include
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -9,3 +12,5 @@ urlpatterns = [
     path('album/<int:pk>/delete', views.delete_album, name='delete-album'),
     path('album/<int:pk>/edit', views.edit_album, name='edit-album'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
