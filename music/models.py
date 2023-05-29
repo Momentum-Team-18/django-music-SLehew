@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Album(models.Model):
@@ -10,6 +11,7 @@ class Album(models.Model):
     band = models.ForeignKey(
         to='Band', on_delete=models.CASCADE, blank=True, null=True)
     cover = models.ImageField(upload_to='images/')
+    user_favorite = models.ManyToManyField(User, default=None, blank=True)
 
     def __str__(self):
         return self.title
@@ -17,6 +19,7 @@ class Album(models.Model):
 
 class Band(models.Model):
     name = models.CharField(max_length=200)
+    solo = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'bands'
@@ -32,6 +35,14 @@ class Song(models.Model):
     album = models.ForeignKey(
         to='Album', on_delete=models.CASCADE, blank=True, null=True, related_name='songs')
     preview = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return self.name
+
+
+class Favorite(models.Model):
+    listener = models.ForeignKey(User, on_delete=models.CASCADE)
+    album = models.ForeignKey(to='Album', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

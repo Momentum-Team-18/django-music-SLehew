@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Album
+from .models import Album, Band, Favorite
 from .forms import AlbumForm
 
 
@@ -38,3 +38,12 @@ def create_album(request):
         form.save()
         return redirect('album_list')
     return render(request, 'music/new_album.html', {'form': form})
+
+
+def favorite_add(request, id):
+    album = get_object_or_404(Album, id=id)
+    if album.user_favorite.filter(id=request.user.id).exists():
+        album.user_favorite.remove(request.user)
+    else:
+        album.user_favorite.add(request.user)
+    return redirect('album_detail')

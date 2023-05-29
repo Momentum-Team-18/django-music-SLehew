@@ -11,6 +11,7 @@ urlpatterns = [
     path('album/new', views.create_album, name="album-new"),
     path('album/<int:pk>/delete', views.delete_album, name='delete-album'),
     path('album/<int:pk>/edit', views.edit_album, name='edit-album'),
+    path('fav/<int:id>/', views.favorite_add, name='favorite-add'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

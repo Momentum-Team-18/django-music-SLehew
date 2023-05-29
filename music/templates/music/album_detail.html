@@ -2,23 +2,29 @@
 
 {% block title %}Album-Details{% endblock %}
 {% block content %}
-<h2>Album Detail</h2>
-<div class="top_container">
-    <h2>Artist: {{ album.band }}</h2>
-    <h3>Album: {{album}}</h3>
-    <img src="{{ album.cover.url }}" width '50'>
-    <a class="title" href="{% url 'album-detail' album.pk %}"></a
-</div>
-<div class="song_container">
-    <h3>Songs: </h3>
-    <h3 class="song_card">{{song}}
-    {% for song in album.songs.all %}
-        <iframe id="embedPlayer" src={{song.preview}} &amp;app=music&amp;itsct=music_box_player&amp;itscg=30200&amp;ls=1&amp;theme=auto" height="175px" frameborder="0" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="width: 100%; max-width: 660px; overflow: hidden; border-radius: 10px; transform: translateZ(0px); animation: 2s ease 0s 6 normal none running loading-indicator; background-color: rgb(228, 228, 228);"></iframe>
-    {% endfor %}
-    </h3>
+<div class="detail_page">
+    <div class="top_container">
+        <h2>Artist: {{ album.band }}</h2>
+        <h3>Album: {{album}}</h3>
+        <img src="{{ album.cover.url }}" width '50'>
+        <a class="title" href="{% url 'album-detail' album.pk %}">
+            {% if album.user_favorite == user.id%}
+                <p>Some content here</p>
+            {% endif %}
+        <a href="" class="button">Add to Favorites</a>
+        </a
     </div>
-<div class = "operations">
-    <a href="{% url 'delete-album' album.pk %}">DELETE</a>
-    <a href="{% url 'edit-album' album.pk %}">EDIT</a>
+    <div class="song_container">
+        <h3>Songs: </h3>
+        <h3 class="song_card">{{song}}
+        {% for song in album.songs.all %}
+            <iframe id="embedPlayer" src={{song.preview}} &amp;app=music&amp;itsct=music_box_player&amp;itscg=30200&amp;ls=1&amp;theme=auto" height="175px" frameborder="0" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="width: 100%; max-width: 660px; overflow: hidden; border-radius: 10px; transform: translateZ(0px); animation: 2s ease 0s 6 normal none running loading-indicator; background-color: rgb(228, 228, 228);"></iframe>
+        {% endfor %}
+        </h3>
+    </div>
+    <div class = "operations">
+        <a href="{% url 'delete-album' album.pk %}">DELETE</a>
+        <a href="{% url 'edit-album' album.pk %}">EDIT</a>
+    </div>
 </div>
 {% endblock %}
